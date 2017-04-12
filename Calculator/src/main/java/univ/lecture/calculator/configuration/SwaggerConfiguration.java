@@ -34,7 +34,7 @@ public class SwaggerConfiguration {
 	@Value("${application.description}")
 	private String applicationDescription;
 
-	@Value("${swagger.enabled:true}")
+	@Value("${swagger.enabled}")
 	private boolean enableSwagger;
 
 	@Bean

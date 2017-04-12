@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -46,7 +47,7 @@ public class CalculatorController {
     
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Cal queryCal(@PathVariable("exp") String exp) throws UnsupportedEncodingException {
+    public Cal queryCal(@RequestParam("exp") String exp) throws UnsupportedEncodingException {
         final int teamId = 10;
         long now = System.currentTimeMillis();
         double result;
