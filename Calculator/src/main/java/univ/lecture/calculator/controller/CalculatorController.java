@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+
 import lombok.extern.log4j.Log4j;
 import univ.lecture.calculator.Calculator;
-import univ.lecture.calculator.model;
+import univ.lecture.calculator.model.Cal;;
 
 /**
  * Created by tchi on 2017. 4. 1..
@@ -37,10 +41,12 @@ public class CalculatorController {
     @Autowired
     private RestTemplate restTemplate;
     
-    /*@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @Value("${calc.endpoint}")
+    private String endpoint;
+    
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String queryCal(@PathVariable("exp") String exp) throws UnsupportedEncodingException {
-    	final String url = "https://demo2446904.mockable.io/api/v1/answer";
+    public Cal queryCal(@PathVariable("exp") String exp) throws UnsupportedEncodingException {
         final int teamId = 10;
         long now = System.currentTimeMillis();
         double result;
@@ -52,17 +58,7 @@ public class CalculatorController {
         cal.setTeamId(teamId);
         cal.setNow(now);
         cal.setResult(result);
-        
-        String msg = restTemplate.postForObject(url, cal, String.class);
 
-        return msg;
-    }*/
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Cal> update(@RequestBody Cal cal) {
-    	cal.setTeamId(teamId);
-        cal.setNow(now);
-        cal.setResult(result);
-        // TODO: call persistence layer to update
-        return new ResponseEntity<Cal>(cal, HttpStatus.OK);
+        return cal;
     }
 }
