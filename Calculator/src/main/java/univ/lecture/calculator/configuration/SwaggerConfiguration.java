@@ -3,6 +3,7 @@ package univ.lecture.calculator.configuration;
 import com.google.common.base.Predicate;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -23,6 +24,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
  * swagger sample :
  * https://github.com/swagger-api/swagger-codegen/blob/master/samples/server/petstore/spring-mvc/src/main/java/io/swagger/api/PetApi.java
  */
+@EnableAutoConfiguration
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
@@ -32,7 +34,7 @@ public class SwaggerConfiguration {
 	@Value("${application.description}")
 	private String applicationDescription;
 
-	@Value("${swagger.enabled}")
+	@Value("${swagger.enabled:true}")
 	private boolean enableSwagger;
 
 	@Bean
@@ -48,7 +50,7 @@ public class SwaggerConfiguration {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title(applicationTitle).description(applicationDescription)
-				.contact(new Contact("riot-kr", "http://www.riotgames.com/", "kor-dev-rg@riotgames.com"))
+				.contact(new Contact("riot-kr", "http://www.cnu.ac.kr/", "kor-dev-rg@riotgames.com"))
 				.license("Apache License Version 2.0")
 				.licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE").version("2.0").build();
 	}
