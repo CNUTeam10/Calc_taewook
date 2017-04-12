@@ -46,7 +46,6 @@ public class CalculatorController {
     private String endpoint;
     
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
     public Cal queryCal(@RequestParam("exp") String exp) throws UnsupportedEncodingException {
         final int teamId = 10;
         long now = System.currentTimeMillis();
