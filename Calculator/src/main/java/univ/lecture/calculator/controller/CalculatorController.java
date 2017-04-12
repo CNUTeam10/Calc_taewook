@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.apache.*;
 
 import lombok.extern.log4j.Log4j;
 import univ.lecture.calculator.Calculator;
-import univ.lecture.calculator.model.Cal;
+import univ.lecture.calculator.model;
 
 /**
  * Created by tchi on 2017. 4. 1..
