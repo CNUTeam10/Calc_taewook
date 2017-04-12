@@ -38,11 +38,6 @@ public class CalculatorController {
         Calculator calculator = new Calculator();
         result = calculator.calculate(exp);
         
-        String response = restTemplate.getForObject(url, String.class);
-        Map<String, Object> parsedMap = new JacksonJsonParser().parseMap(response);
-
-        parsedMap.forEach((key, value) -> log.info(String.format("key [%s] type [%s] value [%s]", key, value.getClass(), value)));
-        
         Map<String, Object> cal = new HashMap<String, Object>();
         cal.put("teamId", teamId);
         cal.put("now", now);
