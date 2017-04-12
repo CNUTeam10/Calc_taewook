@@ -14,4 +14,19 @@ public class Cal {
     private int teamId;
     private long now;
     private double result;
+    
+    public void setTeamId(int teamId)
+    {
+    	this.teamId = teamId;
+    }
+    
+    public void setNow(long now)
+    {
+    	this.now = now;
+    }
+    
+    public void setResult(double result)
+    {
+    	this.result = result;
+    }
 }
