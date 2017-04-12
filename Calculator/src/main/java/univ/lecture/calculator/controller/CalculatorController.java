@@ -28,7 +28,7 @@ public class CalculatorController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping(value = "/Cal/{exp}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String queryCal(@PathVariable("exp") String exp) throws UnsupportedEncodingException {
         final String url = "https://demo2446904.mockable.io/api/v1/answer";
         final int teamId = 10;
