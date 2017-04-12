@@ -1,7 +1,9 @@
 package univ.lecture.calculator.controller;
 
+import java.awt.List;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,8 @@ public class CalculatorController {
     @Value("${calc.endpoint}")
     private String endpoint;
     
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Cal queryCal(@RequestParam("exp") String exp) throws UnsupportedEncodingException {
+    @RequestMapping(method = RequestMethod.POST)
+    public String queryCal(@RequestParam("exp") String exp) throws UnsupportedEncodingException {
         final int teamId = 10;
         long now = System.currentTimeMillis();
         double result;
@@ -54,11 +56,13 @@ public class CalculatorController {
         Calculator calculator = new Calculator();
         result = calculator.calculate(exp);
         
-        Cal cal = new Cal();
-        cal.setTeamId(teamId);
-        cal.setNow(now);
-        cal.setResult(result);
+        Map<String, Object> cal = new HashMap<String, Object>();
+        cal.put("teamId", teamId);
+        cal.put("now", now);
+        cal.put("result", result);
+        
+        String msg = restTemplate.postForObject(endpoint, cal, String.class);
 
-        return cal;
+        return msg;
     }
 }
