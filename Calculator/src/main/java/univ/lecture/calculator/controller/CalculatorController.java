@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.apache.*;
 
 import lombok.extern.log4j.Log4j;
 import univ.lecture.calculator.Calculator;
@@ -28,10 +30,15 @@ import univ.lecture.calculator.model.Cal;
 @RequestMapping("/api/v1/calc")
 @Log4j
 public class CalculatorController {
+
+    final int teamId = 10;
+    long now = System.currentTimeMillis();
+    double result = 0.0;
+    
     @Autowired
     private RestTemplate restTemplate;
     
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    /*@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String queryCal(@PathVariable("exp") String exp) throws UnsupportedEncodingException {
     	final String url = "https://demo2446904.mockable.io/api/v1/answer";
@@ -50,5 +57,13 @@ public class CalculatorController {
         String msg = restTemplate.postForObject(url, cal, String.class);
 
         return msg;
+    }*/
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Cal> update(@RequestBody Cal cal) {
+    	cal.setTeamId(teamId);
+        cal.setNow(now);
+        cal.setResult(result);
+        // TODO: call persistence layer to update
+        return new ResponseEntity<Cal>(cal, HttpStatus.OK);
     }
 }
